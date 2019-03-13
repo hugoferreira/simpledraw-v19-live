@@ -1,5 +1,5 @@
 import { Shape } from './shape'
-import { Action, CreateCircleAction, CreateRectangleAction, TranslateAction } from './actions'
+import { Action, CreateCircleAction, CreateRectangleAction, TranslateAction, CreateSelectionAction } from './actions'
 import { Render } from './render';
 
 export class SimpleDrawDocument {
@@ -44,6 +44,10 @@ export class SimpleDrawDocument {
 
     createCircle(x: number, y: number, radius: number): Shape {
         return this.do(new CreateCircleAction(this, x, y, radius))
+    }
+
+    createSelection(...objs: Array<Shape>) {
+        return this.do(new CreateSelectionAction(this, objs))
     }
 
     translate(s: Shape, xd: number, yd: number): void {

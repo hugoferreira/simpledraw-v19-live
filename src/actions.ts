@@ -1,4 +1,4 @@
-import { Shape, Circle, Rectangle } from './shape'
+import { Shape, Circle, Rectangle, Selection } from './shape'
 import { SimpleDrawDocument } from './document'
 
 export interface Action<T> {
@@ -43,6 +43,33 @@ export class CreateRectangleAction {
     }
 }
 
+
+export class CreateSelectionAction {
+    shape: Selection
+
+    constructor(private doc: SimpleDrawDocument, private objs: Array<Shape>) { }
+
+    do(): Selection {
+        // create selection shape
+        this.shape = new Selection(this.objs)
+        // remove elements from objects
+        this.doc.objects = this.doc.objects.filter(o => !(<any> o in this.objs))
+        // add selection shape to objects
+        this.doc.add(this.shape)
+        return this.shape
+    }
+
+    undo() {
+        // remove selection shape from doc
+        this.doc.objects = this.doc.objects.filter(o => o !== this.shape)
+        // add back the elements
+        this.objs.forEach(element => this.doc.add(element));    
+    }
+}
+
+
+        
+
 export class TranslateAction implements Action<void> {
     oldX: number
     oldY: number
@@ -50,14 +77,14 @@ export class TranslateAction implements Action<void> {
     constructor(private doc: SimpleDrawDocument, public shape: Shape, private xd: number, private yd: number) { }
 
     do(): void {
-        this.oldX = this.shape.x
-        this.oldY = this.shape.y
+        // this.oldX = this.shape.x
+        // this.oldY = this.shape.y
         this.shape.translate(this.xd, this.yd)
     }
 
     undo() {
-        this.shape.x = this.oldX
-        this.shape.y = this.oldY
-       // this.shape.translate(-this.xd, -this.yd)
+        // this.shape.x = this.oldX
+        //this.shape.y = this.oldY
+        this.shape.translate(-this.xd, -this.yd)
     }
 }
