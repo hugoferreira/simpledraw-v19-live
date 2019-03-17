@@ -1,15 +1,19 @@
 {
-    "defaultSeverity": "error",
-    "extends": [
-        "tslint:recommended",
-        "tslint-config-standard",
-        "tslint-config-prettier"
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-standard",
+    "tslint-config-prettier"
+  ],
+  "jsRules": {},
+  "rules": {
+    "interface-name": [
+      true,
+      "never-prefix"
     ],
-    "jsRules": {},
-    "rules": {
-        "interface-name" : [true, "never-prefix"],
-        "max-classes-per-file": [false]
-
-    },
-    "rulesDirectory": []
+    "max-classes-per-file": [
+      false
+    ]
+  },
+  "rulesDirectory": []
 }
