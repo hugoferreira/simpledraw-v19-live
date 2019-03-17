@@ -7,7 +7,8 @@ services:
     build:
       context: ./
     volumes:
-      - ./:/home/node/app
+      - ./src:/usr/src/app/src
+      - ./dist:/usr/src/app/dist
     container_name: simpledraw-client
     environment:
       ENVIRONMENT: development

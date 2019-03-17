@@ -19,13 +19,14 @@
   },
   "scripts": {
     "build": "tsc",
+    "build:watch": "tsc --watch",
     "browserify": "browserify build/script.js -o dist/bundle.js",
     "browser": "npm run build; npm run browserify; opn index.html",
     "start": "npm run build; node build/main.js",
     "watchify": "watchify build/script.js -o dist/bundle.js",
     "lint": "tslint \"src/**/*.ts\"",
     "lint:fix": "tslint \"src/**/*.ts\" --fix",
-    "dev": "tsc --watch & npm run watchify",
+    "dev": "npm run build:watch & npm run watchify",
     "dev:fix": "docker exec simpledraw-client npm run lint:fix"
   }
 }
