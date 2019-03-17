@@ -99,3 +99,5 @@ typings/
 
 /dist
 /build
+
+.idea/
