@@ -1,5 +1,5 @@
 import { SimpleDrawDocument } from './document'
-import { CanvasRender, SVGRender } from './render'
+import { CanvasRender, SVGRender } from './render';
 
 const canvasrender = new CanvasRender()
 const svgrender = new SVGRender()
