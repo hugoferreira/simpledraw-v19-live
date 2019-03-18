@@ -2,7 +2,7 @@
 export abstract class Shape {
     constructor(public x: number, public y: number) { }
 
-    translate(xd: number, yd: number): void {
+    public translate(xd: number, yd: number): void {
         this.x += xd
         this.y += yd
     }

@@ -1,17 +1,17 @@
-import { Shape, Circle, Rectangle } from "./shape"
+import { Circle, Rectangle, Shape } from "./shape"
 
 export interface Render {
-    draw(...objs: Array<Shape>): void
+    draw(...objs: Shape[]): void
 }
 
 export class SVGRender implements Render {
-    svg: HTMLElement
+    public svg: HTMLElement
 
     constructor() {
-        this.svg = <HTMLElement>document.getElementById('svgcanvas')
+        this.svg = document.getElementById('svgcanvas') as HTMLElement
     }
 
-    draw(...objs: Array<Shape>): void {
+    public draw(...objs: Shape[]): void {
         for (const shape of objs) {
             if (shape instanceof Rectangle) {
                 const e = document.createElementNS("http://www.w3.org/2000/svg", "rect")
@@ -27,14 +27,14 @@ export class SVGRender implements Render {
 }
 
 export class CanvasRender implements Render {
-    ctx: CanvasRenderingContext2D
+    public ctx: CanvasRenderingContext2D
 
     constructor() {
-        const canvas = <HTMLCanvasElement>document.getElementById('canvas')
+        const canvas = document.getElementById('canvas') as HTMLCanvasElement
         this.ctx = canvas.getContext('2d')
     }
 
-    draw(...objs: Array<Shape>): void {
+    public draw(...objs: Shape[]): void {
         for (const shape of objs) {
             if (shape instanceof Circle) {
                 this.ctx.ellipse(shape.x, shape.y, shape.radius, shape.radius, 0, 0, 2 * Math.PI)

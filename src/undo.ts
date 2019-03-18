@@ -1,10 +1,10 @@
-type UndoableAction<S> = { do(): S; undo(): void }
+interface UndoableAction<S> { do(): S; undo(): void }
 
 export class UndoManager<S, A extends UndoableAction<S>> {
-  doStack = new Array<A>();
-  undoStack = new Array<A>();
+  public doStack = new Array<A>();
+  public undoStack = new Array<A>();
 
-  undo() {
+  public undo() {
     if (this.doStack.length > 0) {
       const a1 = this.doStack.pop();
       a1.undo();
@@ -12,7 +12,7 @@ export class UndoManager<S, A extends UndoableAction<S>> {
     }
   }
 
-  redo() {
+  public redo() {
     if (this.undoStack.length > 0) {
       const a1 = this.undoStack.pop();
       a1.do();
@@ -20,7 +20,7 @@ export class UndoManager<S, A extends UndoableAction<S>> {
     }
   }
 
-  onActionDone(a: A): void {
+  public onActionDone(a: A): void {
     this.doStack.push(a);
     this.undoStack.length = 0;
   }

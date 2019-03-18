@@ -1,5 +1,5 @@
-import { Shape, Circle, Rectangle } from './shape'
 import { SimpleDrawDocument } from './document'
+import { Circle, Rectangle, Shape } from './shape'
 
 export interface Action<T> {
     readonly shape: Shape
@@ -10,12 +10,12 @@ export interface Action<T> {
 abstract class CreateShapeAction<S extends Shape> implements Action<Shape> {
     constructor(private doc: SimpleDrawDocument, public readonly shape: S) { }
 
-    do(): Shape {
+    public do(): Shape {
         this.doc.add(this.shape)
         return this.shape
     }
 
-    undo() {
+    public undo() {
         this.doc.objects = this.doc.objects.filter(o => o !== this.shape)
     }
 }
@@ -33,18 +33,18 @@ export class CreateRectangleAction extends CreateShapeAction<Rectangle> {
 }
 
 export class TranslateAction implements Action<void> {
-    oldX: number
-    oldY: number
+    public oldX: number
+    public oldY: number
 
     constructor(private doc: SimpleDrawDocument, public shape: Shape, private xd: number, private yd: number) { }
 
-    do(): void {
+    public do(): void {
         this.oldX = this.shape.x
         this.oldY = this.shape.y
         this.shape.translate(this.xd, this.yd)
     }
 
-    undo() {
+    public undo() {
         this.shape.x = this.oldX
         this.shape.y = this.oldY
        // this.shape.translate(-this.xd, -this.yd)
