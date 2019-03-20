@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  simpledraw-client:
+    image: simpledraw-client
+    command: npm run dev
+    build:
+      context: ./
+    volumes:
+      - ./src:/usr/src/app/src
+      - ./dist:/usr/src/app/dist
+    container_name: simpledraw-client
+    environment:
+      ENVIRONMENT: development
